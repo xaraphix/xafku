@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ThemeSwitcher from "@/components/ThemeSwitcher.vue";
 import TheMenuItems from "@/components/TheMenuItems.vue";
+import ThemeSwitcher from "@/components/ThemeSwitcher.vue";
 import { themeModes } from "@/constants/theme";
 import { themeStore } from "@/store/ThemeStore";
 import { computed } from "@vue/reactivity";
@@ -13,6 +13,26 @@ const isAtTop = () => {
 };
 
 const routes = computed(() => useRouter().currentRoute.value);
+onMounted(() => {
+  const pageLink = document.querySelectorAll(".menu-scroll-link");
+  document.querySelectorAll(".menu-scroll-link");
+  pageLink.forEach((elem) => {
+    elem.addEventListener("click", (e) => {
+      e.preventDefault();
+      const link = elem.getAttribute("href");
+      console.log(link);
+      if (link?.startsWith("#home")) {
+        document.querySelector(link)?.scrollIntoView({
+          behavior: "smooth",
+        });
+      } else if (link && document) {
+        document.querySelector(link)?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+});
 
 onMounted(() => window.addEventListener("scroll", isAtTop));
 onUnmounted(() => window.removeEventListener("scroll", isAtTop));
@@ -53,13 +73,13 @@ onUnmounted(() => window.removeEventListener("scroll", isAtTop));
           <img
             v-if="themeStore.theme === themeModes.LIGHT"
             :src="'../assets/projects/xafkulogo-dark.svg'"
-            class="rounded-full w-32"
+            class="w-32"
             alt="Avatar"
           />
           <img
             v-else
             :src="'../assets/projects/xafkulogo.svg'"
-            class="rounded-full w-32"
+            class="w-32"
             alt="Avatar"
           />
         </a>

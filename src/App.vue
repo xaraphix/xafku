@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { themeModes } from "./constants/theme";
 import "./assets/base.css";
-import TheNavigation from "./layout/TheNavigation.vue";
-import TheFooter from "./layout/TheFooter.vue";
+import TheNavigationVue from "./layout/TheNavigation.vue";
+import TheFooterVue from "./layout/TheFooter.vue";
+import { themeModes } from "./constants/theme";
 import { themeStore } from "./store/ThemeStore";
 
 const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -23,10 +23,10 @@ if (
     class="flex flex-col font-sans min-h-screen w-screen"
     :data-theme="themeStore.theme === themeModes.DARK ? 'dark' : 'light'"
   >
-    <TheNavigation />
+    <TheNavigationVue />
     <div class="flex flex-col min-h-screen px-16 xl:px-5 2xl:px-32 py-10">
       <router-view></router-view>
     </div>
-    <TheFooter />
+    <TheFooterVue />
   </div>
 </template>
